@@ -23,6 +23,7 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long code;
+
     private String description;
 
     /**
@@ -31,7 +32,12 @@ public class Product implements Serializable {
      * @param code
      * @param description
      */
+    public Product(){
+    }
+
     public Product(Long code, String description) {
+        this.code = code;
+        this.description = description;
     }
 
     /**
