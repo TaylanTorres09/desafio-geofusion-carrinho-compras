@@ -1,5 +1,6 @@
 package br.com.api.geofusion.cart.models;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +10,8 @@ import jakarta.persistence.Id;
 /**
  * Classe que representa um item no carrinho de compras.
  */
-public class Item {
+public class Item implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Construtor da classe Item.
