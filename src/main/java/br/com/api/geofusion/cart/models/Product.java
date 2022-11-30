@@ -2,6 +2,10 @@ package br.com.api.geofusion.cart.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  * Classe que representa um produto que pode ser adicionado
  * como item ao carrinho de compras.
@@ -12,7 +16,12 @@ import java.io.Serializable;
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    
+    /**
+     * Transformar o atributo code em PrimaryKey, pois se 2 produtos são considerandos
+     * iguais com o mesmo código então eles não podem ter descrições diferentes
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long code;
     private String description;
 
