@@ -2,6 +2,10 @@ package br.com.api.geofusion.cart.models;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 /**
  * Classe que representa um item no carrinho de compras.
  */
@@ -13,16 +17,35 @@ public class Item {
      * @param product
      * @param unitPrice
      * @param quantity
-     */
-    public Item(Product product, BigDecimal unitPrice, int quantity) {
-    }
+    **/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+     private Product product;
+
+    
+     private BigDecimal unitPrice;
+
+    
+     private Integer quantity;
+
+    
+     public Item(){
+     }
+
+    
+     public Item(Product product, BigDecimal unitPrice, int quantity) {
+
+     }
 
     /**
      * Retorna o produto.
      *
      * @return Produto
      */
-    public Product getProduct() {
+    
+     public Product getProduct() {
         return null;
     }
 
