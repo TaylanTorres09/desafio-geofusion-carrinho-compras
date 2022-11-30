@@ -28,7 +28,7 @@ public class Item implements Serializable {
     
     private BigDecimal unitPrice;
 
-    private Integer quantity;
+    private int quantity;
 
     
     public Item(){
@@ -42,14 +42,18 @@ public class Item implements Serializable {
         this.quantity = quantity;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     /**
      * Retorna o produto.
      *
      * @return Produto
      */
     
-     public Product getProduct() {
-        return null;
+    public Product getProduct() {
+        return product;
     }
 
     /**
@@ -58,7 +62,7 @@ public class Item implements Serializable {
      * @return BigDecimal
      */
     public BigDecimal getUnitPrice() {
-        return null;
+        return unitPrice;
     }
 
     /**
@@ -67,7 +71,26 @@ public class Item implements Serializable {
      * @return int
      */
     public int getQuantity() {
-        return 0;
+        return quantity;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+
+    public void setUnitPrice(BigDecimal unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     /**
@@ -76,7 +99,8 @@ public class Item implements Serializable {
      * @return BigDecimal
      */
     public BigDecimal getAmount() {
-        return null;
+        return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
+
 }
 
