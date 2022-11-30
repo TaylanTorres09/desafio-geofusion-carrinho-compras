@@ -2,9 +2,11 @@ package br.com.api.geofusion.cart.models;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
  * Classe que representa um produto que pode ser adicionado
@@ -13,6 +15,8 @@ import jakarta.persistence.Id;
  * Importante: Dois produtos são considerados iguais quando ambos possuem o
  * mesmo código.
  */
+@Entity
+@Table(name = "products")
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
