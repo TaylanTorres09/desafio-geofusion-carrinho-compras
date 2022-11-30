@@ -22,22 +22,23 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-     private Product product;
+    private Product product;
+    
+    private BigDecimal unitPrice;
+
+    private Integer quantity;
 
     
-     private BigDecimal unitPrice;
+    public Item(){
+    }
 
     
-     private Integer quantity;
-
-    
-     public Item(){
-     }
-
-    
-     public Item(Product product, BigDecimal unitPrice, int quantity) {
-
-     }
+    public Item(Long id, Product product, BigDecimal unitPrice, int quantity) {
+        this.id = id;
+        this.product = product;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+    }
 
     /**
      * Retorna o produto.
