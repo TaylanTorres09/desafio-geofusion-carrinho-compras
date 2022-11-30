@@ -102,6 +102,7 @@ public class Item implements Serializable {
         return unitPrice.multiply(BigDecimal.valueOf(quantity));
     }
 
+    // Comparação entre objetos pelo id.
     @Override
     public int hashCode() {
         final int prime = 31;

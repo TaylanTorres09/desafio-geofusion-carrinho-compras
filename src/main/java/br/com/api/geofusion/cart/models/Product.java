@@ -1,5 +1,7 @@
 package br.com.api.geofusion.cart.models;
 
+import java.io.Serializable;
+
 /**
  * Classe que representa um produto que pode ser adicionado
  * como item ao carrinho de compras.
@@ -7,7 +9,8 @@ package br.com.api.geofusion.cart.models;
  * Importante: Dois produtos são considerados iguais quando ambos possuem o
  * mesmo código.
  */
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     private Long code;
     private String description;
@@ -27,7 +30,7 @@ public class Product {
      * @return Long
      */
     public Long getCode() {
-        return this.code;
+        return code;
     }
 
     /**
@@ -36,7 +39,7 @@ public class Product {
      * @return String
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
 }
