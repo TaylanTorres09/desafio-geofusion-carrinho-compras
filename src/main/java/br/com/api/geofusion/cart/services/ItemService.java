@@ -1,12 +1,14 @@
 package br.com.api.geofusion.cart.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import br.com.api.geofusion.cart.dto.ItemDto;
 import br.com.api.geofusion.cart.models.Item;
 import br.com.api.geofusion.cart.repositories.ItemRepository;
 import br.com.api.geofusion.cart.repositories.ProductRepository;
@@ -31,6 +33,17 @@ public class ItemService {
 
     public List<Item> findAllItems() {
         return itemRepository.findAll();
+    }
+
+    public ResponseEntity<?> updateItem(ItemDto itemDto, Long id) {
+        try {
+            Item item = itemRepository.findById(id).get();
+            item.setUnitPrice(itemDto.getUnitPrice());
+
+            return new ResponseEntity<Item>(itemRepository.save(item), HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
 }
