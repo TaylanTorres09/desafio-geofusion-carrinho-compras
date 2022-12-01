@@ -61,7 +61,10 @@ public class ShoppingCart {
      * @return BigDecimal
      */
     public BigDecimal getAmount() {
-        return null;
+        BigDecimal resultAmount = items.stream()
+                                    .map(item -> item.getAmount())
+                                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return resultAmount;
     }
 
     /**
