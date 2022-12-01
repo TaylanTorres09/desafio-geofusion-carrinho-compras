@@ -1,11 +1,16 @@
 package br.com.api.geofusion.cart.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -29,6 +34,10 @@ public class Product implements Serializable {
     private Long code;
 
     private String description;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    private List<Item> items = new ArrayList<>();
 
     /**
      * Construtor da classe Produto.
@@ -61,6 +70,16 @@ public class Product implements Serializable {
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Retorna a lista de itens que o produto está inserido.
+     *
+     * @return List<Item>
+     */
+    public List<Item> getItems() {
+        return items;
+    }
+
 
     public void setCode(Long code) {
         this.code = code;
