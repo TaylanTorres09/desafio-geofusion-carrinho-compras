@@ -1,5 +1,7 @@
 package br.com.api.geofusion.cart.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,10 @@ public class ItemService {
             return itemRepository.save(item);
         }).orElseThrow(() -> new ResourceNotFoundException(productId));
         return new ResponseEntity<>(_item, HttpStatus.CREATED);
+    }
+
+    public List<Item> findAllItems() {
+        return itemRepository.findAll();
     }
 
 }
