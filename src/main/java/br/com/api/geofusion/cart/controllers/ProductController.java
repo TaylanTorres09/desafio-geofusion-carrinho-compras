@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.api.geofusion.cart.dto.ProductDto;
 import br.com.api.geofusion.cart.models.Product;
 import br.com.api.geofusion.cart.services.ProductService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/product")
@@ -20,7 +21,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<?> registerProduct(@Valid @RequestBody ProductDto productDto) {
         Product product = new Product();
         BeanUtils.copyProperties(productDto, product);
         return productService.registerProduct(product);
