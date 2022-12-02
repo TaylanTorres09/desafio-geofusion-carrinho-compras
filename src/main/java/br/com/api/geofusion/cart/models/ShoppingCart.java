@@ -9,6 +9,8 @@ import java.util.List;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
 /**
@@ -24,6 +26,14 @@ public class ShoppingCart implements Serializable {
 
     @OneToMany(mappedBy = "shoppingCart")
     private List<Item> items;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    public ShoppingCart(List<Item> items){
+        this.items = items;
+    }
 
     public ShoppingCart(Long id, List<Item> items) {
         this.id = id;
