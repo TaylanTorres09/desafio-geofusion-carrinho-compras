@@ -3,6 +3,8 @@ package br.com.api.geofusion.cart.models;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,6 +39,11 @@ public class Item implements Serializable {
     private BigDecimal unitPrice;
 
     private int quantity;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "")
+    private ShoppingCart shoppingCart;
 
     
     public Item(){

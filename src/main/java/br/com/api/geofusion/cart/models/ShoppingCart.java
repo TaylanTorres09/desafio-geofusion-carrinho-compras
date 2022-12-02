@@ -1,16 +1,34 @@
 package br.com.api.geofusion.cart.models;
 
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
 /**
  * Classe que representa o carrinho de compras de um cliente.
  */
-public class ShoppingCart {
+public class ShoppingCart implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToMany(mappedBy = "shoppingCart")
     private List<Item> items;
+
+    public ShoppingCart(Long id, List<Item> items) {
+        this.id = id;
+        this.items = items;
+    }
 
     /**
      * Permite a adição de um novo item no carrinho de compras.
@@ -73,6 +91,6 @@ public class ShoppingCart {
      * @return items
      */
     public Collection<Item> getItems() {
-        return null;
+        return items;
     }
 }
