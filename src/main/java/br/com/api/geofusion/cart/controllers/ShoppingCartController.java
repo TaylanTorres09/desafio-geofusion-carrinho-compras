@@ -29,16 +29,6 @@ public class ShoppingCartController {
         return shoppingCart.create(clientId);
     }
 
-    // @GetMapping()
-    // public List<Item> findAllItems(){
-    //     return itemService.findAllItems();
-    // }
-
-    // @PutMapping("/update/{itemId}")
-    // public ResponseEntity<?> updateItem(@Valid @RequestBody ItemDto itemDto, @PathVariable(name = "itemId") Long itemId) {
-    //     return itemService.updateItem(itemDto, itemId);
-    // }
-
     @GetMapping("/{clientId}")
     public List<ShoppingCart> findByClient(@PathVariable(name = "clientId") Long clientId) {
         return shoppingCart.findByClient(clientId);
