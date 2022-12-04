@@ -39,4 +39,9 @@ public class ShoppingCartController {
     //     return itemService.updateItem(itemDto, itemId);
     // }
 
+    @GetMapping("/{clientId}")
+    public List<ShoppingCart> findByClient(@PathVariable(name = "clientId") Long clientId) {
+        return shoppingCart.findByClient(clientId);
+    }
+
 }

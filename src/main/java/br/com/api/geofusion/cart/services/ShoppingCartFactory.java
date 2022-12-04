@@ -2,14 +2,17 @@ package br.com.api.geofusion.cart.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.api.geofusion.cart.models.ShoppingCart;
 import br.com.api.geofusion.cart.repositories.ClientRepository;
 import br.com.api.geofusion.cart.repositories.ShoppingCartRepository;
+import br.com.api.geofusion.cart.services.exceptions.ResourceNotFoundException;
 
 /**
  * Classe responsável pela criação e recuperação dos carrinhos de compras.
@@ -32,13 +35,25 @@ public class ShoppingCartFactory {
      * @return ShoppingCart
      */
     public ShoppingCart create(String clientId) {
-        ShoppingCart shoppingCart = new ShoppingCart(new ArrayList<>());
+        Long _clientId = Long.parseLong(clientId);
+
+        if(!findByClient(_clientId).isEmpty()){
+            return findByClient(_clientId).get(0);
+        }
+
+        ShoppingCart _shoppingCart = new ShoppingCart(new ArrayList<>());
+        ShoppingCart shoppingCart = clientRepository.findById(_clientId).map(client -> {
+            _shoppingCart.setClient(client);
+            return shoppingCartRepository.save(_shoppingCart);
+        }).orElseThrow(() -> new ResourceNotFoundException(_clientId));
+
         return shoppingCart;
     }
-
-    // public ResponseEntity<?> createShoppingCart() {
-
-    // }
+    
+    public List<ShoppingCart> findByClient(Long clientId) {
+        return shoppingCartRepository.findAll().stream()
+                                        .filter(cart -> cart.getClient().getId() == clientId).toList();
+    }
 
 
     /**
