@@ -35,6 +35,9 @@ public class ShoppingCart implements Serializable {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    public ShoppingCart(){
+    }
+
     public ShoppingCart(List<Item> items){
         this.items = items;
     }
@@ -106,5 +109,21 @@ public class ShoppingCart implements Serializable {
      */
     public Collection<Item> getItems() {
         return items;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }
