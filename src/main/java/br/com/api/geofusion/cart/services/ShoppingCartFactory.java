@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.api.geofusion.cart.models.ShoppingCart;
@@ -49,7 +47,7 @@ public class ShoppingCartFactory {
 
         return shoppingCart;
     }
-    
+
     public List<ShoppingCart> findByClient(Long clientId) {
         return shoppingCartRepository.findAll().stream()
                                         .filter(cart -> cart.getClient().getId() == clientId).toList();
