@@ -6,11 +6,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,8 +28,8 @@ public class Client implements Serializable {
     private String password;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "client")
-    private List<ShoppingCart> shoppingCarts = new ArrayList<>();
+    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    private ShoppingCart shoppingCarts;
     
     public Client(){
     }
