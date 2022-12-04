@@ -24,6 +24,7 @@ public class ShoppingCartController {
         return shoppingCart.create(clientId);
     }
 
+    // Teste
     @GetMapping("/{clientId}")
     public List<ShoppingCart> findByClient(@PathVariable(name = "clientId") Long clientId) {
         return shoppingCart.findByClient(clientId);

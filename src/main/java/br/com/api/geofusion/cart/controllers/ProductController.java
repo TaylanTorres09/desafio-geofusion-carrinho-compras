@@ -30,6 +30,7 @@ public class ProductController {
         return productService.registerProduct(product);
     }
 
+    // Teste
     @GetMapping()
     public List<Product> findAll(){
         return productService.findAll();

@@ -25,6 +25,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
+    // Teste
     @PostMapping("/register/{productId}")
     public ResponseEntity<?> registerItem(@Valid @RequestBody ItemDto itemDto, @PathVariable(name = "productId") Long productId) {
         Item item = new Item();
@@ -32,6 +33,7 @@ public class ItemController {
         return itemService.registerItem(item, productId);
     }
 
+    // Teste
     @GetMapping()
     public List<Item> findAllItems(){
         return itemService.findAllItems();
