@@ -1,11 +1,27 @@
-package br.com.api.geofusion.cart.models;
+package br.com.api.geofusion.cart.services;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import br.com.api.geofusion.cart.models.ShoppingCart;
+import br.com.api.geofusion.cart.repositories.ClientRepository;
+import br.com.api.geofusion.cart.repositories.ShoppingCartRepository;
 
 /**
  * Classe responsável pela criação e recuperação dos carrinhos de compras.
  */
+@Service
 public class ShoppingCartFactory {
+
+    @Autowired
+    private ShoppingCartRepository shoppingCartRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
 
     /**
      * Cria e retorna um novo carrinho de compras para o cliente passado como parâmetro.
@@ -16,8 +32,14 @@ public class ShoppingCartFactory {
      * @return ShoppingCart
      */
     public ShoppingCart create(String clientId) {
-        return null;
+        ShoppingCart shoppingCart = new ShoppingCart(new ArrayList<>());
+        return shoppingCart;
     }
+
+    // public ResponseEntity<?> createShoppingCart() {
+
+    // }
+
 
     /**
      * Retorna o valor do ticket médio no momento da chamada ao método.

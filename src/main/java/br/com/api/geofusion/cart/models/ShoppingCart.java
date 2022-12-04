@@ -6,16 +6,20 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 /**
  * Classe que representa o carrinho de compras de um cliente.
  */
+@Entity
+@Table(name = "shopping-carts")
 public class ShoppingCart implements Serializable {
 
     private static final long serialVersionUID = 1L;
