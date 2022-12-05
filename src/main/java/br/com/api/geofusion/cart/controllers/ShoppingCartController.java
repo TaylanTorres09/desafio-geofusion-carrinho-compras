@@ -1,5 +1,6 @@
 package br.com.api.geofusion.cart.controllers;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,12 @@ public class ShoppingCartController {
                                             @RequestParam(name = "indexItem") Integer indexItem
     ) {
         return shoppingCart.deleteItemCart(clientId, indexItem);
+    }
+
+    // Teste
+    @GetMapping("/avg-ticket-amount")
+    public BigDecimal getAverageTicketAmount(){
+        return shoppingCart.getAverageTicketAmount();
     }
 
 }

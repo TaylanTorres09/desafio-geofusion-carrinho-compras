@@ -1,6 +1,7 @@
 package br.com.api.geofusion.cart.services;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -188,6 +189,14 @@ public class ShoppingCartFactory {
     }
 
     /**
+     * Retorna todos os carrinhos
+     * @return List<ShoppingCart>
+     */
+    public List<ShoppingCart> findAll() {
+        return shoppingCartRepository.findAll();
+    }
+
+    /**
      * Retorna o valor do ticket médio no momento da chamada ao método.
      * O valor do ticket médio é a soma do valor total de todos os carrinhos de compra dividido
      * pela quantidade de carrinhos de compra.
@@ -197,7 +206,12 @@ public class ShoppingCartFactory {
      * @return BigDecimal
      */
     public BigDecimal getAverageTicketAmount() {
-        return null;
+        List<ShoppingCart> shoppingCarts = findAll();
+        BigDecimal ticketAmount = shoppingCarts.stream().map(cart -> cart.getAmount())
+                                                        .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal avgTicketAmount = ticketAmount.divide(BigDecimal.valueOf(shoppingCarts.size()));
+        MathContext mathContext = new MathContext(2);
+        return avgTicketAmount.round(mathContext);
     }
 
     /**
