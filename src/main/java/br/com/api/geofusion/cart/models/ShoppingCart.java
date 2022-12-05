@@ -3,6 +3,7 @@ package br.com.api.geofusion.cart.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,10 +39,6 @@ public class ShoppingCart implements Serializable {
     public ShoppingCart(){
     }
 
-    public ShoppingCart(List<Item> items){
-        this.items = items;
-    }
-
     public ShoppingCart(Long id, List<Item> items) {
         this.id = id;
         this.items = items;
@@ -62,7 +59,11 @@ public class ShoppingCart implements Serializable {
      * @param quantity
      */
     public void addItem(Product product, BigDecimal unitPrice, int quantity) {
-
+           
+    }
+    // Teste
+    public void addItemTest(Item item) {
+        items.add(item);
     }
 
     /**
