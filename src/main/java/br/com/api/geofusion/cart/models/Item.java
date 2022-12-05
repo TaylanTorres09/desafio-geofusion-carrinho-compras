@@ -143,5 +143,20 @@ public class Item implements Serializable {
         return true;
     }
 
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
+    }
+
 }
 
