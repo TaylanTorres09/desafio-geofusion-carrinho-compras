@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,13 @@ public class ShoppingCartController {
                                 @RequestParam Long productId
     ) {
         return shoppingCart.addItemCart(itemDto, clientId, productId);
+    }
+
+    @DeleteMapping("/delete-product/cart")
+    public ResponseEntity<?> deleteProductCart(@RequestParam(name = "clientId") Long clientId, 
+                                            @RequestParam(name = "productId") Long productId
+    ) {
+        return shoppingCart.deleteProductCart(clientId, productId);
     }
 
 }

@@ -4,19 +4,24 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.api.geofusion.cart.dto.ItemDto;
 import br.com.api.geofusion.cart.models.Item;
+import br.com.api.geofusion.cart.models.Product;
 import br.com.api.geofusion.cart.models.ShoppingCart;
 import br.com.api.geofusion.cart.repositories.ClientRepository;
 import br.com.api.geofusion.cart.repositories.ItemRepository;
 import br.com.api.geofusion.cart.repositories.ShoppingCartRepository;
+import br.com.api.geofusion.cart.services.exceptions.DatabaseException;
 import br.com.api.geofusion.cart.services.exceptions.ResourceNotFoundException;
 
 /**
@@ -31,10 +36,14 @@ public class ShoppingCartFactory {
     @Autowired
     private ClientRepository clientRepository;
 
-    @Autowired ItemRepository itemRepository;
+    @Autowired 
+    private ItemRepository itemRepository;
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private ProductService productService;
 
     /**
      * Cria e retorna um novo carrinho de compras para o cliente passado como parâmetro.
@@ -108,6 +117,35 @@ public class ShoppingCartFactory {
             return new ResponseEntity<ShoppingCart>(shoppingCart, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
+    public ResponseEntity<?> deleteProductCart(Long clientId, Long productId){
+        try {
+            Product product = productService.findById(productId);
+
+            List<ShoppingCart> shoppingCarts = findByClient(clientId);
+            if(shoppingCarts.isEmpty())
+                return new ResponseEntity<String>("Client without cart", HttpStatus.BAD_GATEWAY);
+            
+            ShoppingCart shoppingCart = shoppingCarts.get(0);
+            
+            if(shoppingCart.removeItem(product)) {
+                List<Item> itemsCart = shoppingCart.getItems().stream().filter(item -> item.getProduct().getCode() == product.getCode()).toList();
+                shoppingCart.getItems().remove(itemsCart.get(0));
+                shoppingCartRepository.save(shoppingCart);
+
+                itemRepository.delete(itemsCart.get(0));
+                return new ResponseEntity<ShoppingCart>(shoppingCart, HttpStatus.OK);
+            }
+            return new ResponseEntity<String>("Product not exists in Cart", HttpStatus.BAD_REQUEST);
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(productId);
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException(productId);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
         }
     }
 
