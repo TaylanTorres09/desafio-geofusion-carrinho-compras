@@ -69,4 +69,8 @@ public class Client implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setShoppingCarts(ShoppingCart shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
+    }
 }
