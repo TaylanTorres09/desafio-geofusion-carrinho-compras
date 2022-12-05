@@ -41,6 +41,7 @@ public class ItemService {
         try {
             Item item = itemRepository.findById(id).get();
             item.setUnitPrice(itemDto.getUnitPrice());
+            item.setQuantity(item.getQuantity() + itemDto.getQuantity());
 
             return new ResponseEntity<Item>(itemRepository.save(item), HttpStatus.OK);
         } catch (NoSuchElementException e) {
