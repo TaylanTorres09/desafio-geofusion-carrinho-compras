@@ -23,7 +23,6 @@ public class ItemService {
     @Autowired
     private ProductRepository productRepository;
 
-    // Teste
     public ResponseEntity<?> registerItem(Item item, Long productId) {
         Item _item = productRepository.findById(productId).map(product -> {
             item.setProduct(product);
@@ -32,7 +31,6 @@ public class ItemService {
         return new ResponseEntity<>(_item, HttpStatus.CREATED);
     }
 
-    // Teste
     public List<Item> findAllItems() {
         return itemRepository.findAll();
     }

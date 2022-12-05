@@ -52,13 +52,11 @@ public class ShoppingCartController {
         return shoppingCart.deleteItemCart(clientId, indexItem);
     }
 
-    // Teste
     @GetMapping("/avg-ticket-amount")
     public BigDecimal getAverageTicketAmount(){
         return shoppingCart.getAverageTicketAmount();
     }
 
-    // Teste
     @DeleteMapping("/delete/cart/{clientId}")
     public Boolean invalidate(@PathVariable(name = "clientId") String clientId) {
         return shoppingCart.invalidate(clientId);

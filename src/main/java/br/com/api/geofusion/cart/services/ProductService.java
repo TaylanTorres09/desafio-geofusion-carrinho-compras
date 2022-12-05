@@ -20,7 +20,6 @@ public class ProductService {
         return new ResponseEntity<Product>(productRepository.save(product), HttpStatus.CREATED);
     }
 
-    // Teste
     public List<Product> findAll() {
         return productRepository.findAll();
     }

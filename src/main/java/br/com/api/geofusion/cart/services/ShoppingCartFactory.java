@@ -80,7 +80,6 @@ public class ShoppingCartFactory {
                                         .filter(cart -> cart.clientId().equals(clientId)).toList();
     }
 
-    // Teste
     public ShoppingCart addItem(Long clientId, Long itemId){
         ShoppingCart shoppingCart = findByClient(clientId).get(0);
 
