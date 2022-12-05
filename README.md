@@ -26,6 +26,20 @@ Para criarmos um item teremos que ter obrigatóriamente um produto já cadastrad
 
 ### EndPoints do projeto:
 
+EndPoints principais do projeto.
+
+#### Para Client:
+registro: /client/register [Post] Abaixo segue *request body*:
+``` Json Body
+{
+    "name": "string",
+    "email": "string",
+    "password": "string"
+}
+```
+
+listar: /client [Get]
+
 #### Para Produtos:
 - Cadastro: /product/register [Post] Abaixo segue *request body*:
 ``` Json Body
@@ -35,40 +49,35 @@ Para criarmos um item teremos que ter obrigatóriamente um produto já cadastrad
 ```
 - Listar: /product [Get]
 
-#### Para Pessoa Jurídica:
-- Cadastro: /company/register [Post] Abaixo segue request:
-``` Json Body
-{
-    "name": "string",
-    "email": "string",
-    "anualIncoming": "double",
-    "numbersOfEmployees": "integer",
-}
-```
-- Listar: /company [Get]
-- Encontrar por nome: /company/{name} [Get]
-- Atualizar: /company/update/{id} [Put] Abaixo segue request:
-``` Json Body
-{
-    "anualIncoming": "double",
-    "numbersOfEmployees": "integer",
-}
-```
-- Remover: /company/remove/{id} [Delete]
+#### Para Item:
+- Update **Ateração de preços**: /item/update/{itemId} passar **id** do item na url 
 
-#### Para Email:
-- Enviar: /email/sending [Post] Abaixo segue request:
+[Put] Abaixo segue request:
 ``` Json Body
 {
-    // Proprietário - atribute name
-    "ownerRef": "string",
-    "emailTo": "string",
-    "subject": "string",
-    // INDIVIDUAL (Pessoa Física) ou COMPANY (Pessoa Jurídica)
-    "whoTaxPayer": "string",
+    "unitPrice": "BigDecimal"
 }
 ```
-- Listar: /email/listAll [Get]
+- Listar: /item [Get]
+
+#### Para Carrinho:
+- Criar carrinho: /shopping-cart/register/{clientId} passar **id** do client na url [Post]
+
+- Listar: /shopping-cart/{clientId} [Get]
+
+- Adicionar itens: /shopping-cart/add-item?clientId=id&productId=id passar os ids respectivos do cliente e do produto como *query params*.
+
+[Put] Abaixo segue request:
+``` Json Body
+{
+    "unitPrice": "BigDecimal",
+    "quantity": "int"
+}
+```
+
+- Deletar item passando o produto como parametro: /shopping-cart/delete-product/cart?clientId=id&productId=id [Delete]
+
+- Deletar item passando a posição: /shopping-cart/delete-product/cart?clientId=id&indexItem=posição [Delete]
 
 ### Descrição - Executar Api localmente:
 - Para clonar o projeto: git clone https://github.com/TaylanTorres09/taxPayer-api
