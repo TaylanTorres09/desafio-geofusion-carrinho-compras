@@ -112,7 +112,7 @@ public class ShoppingCart implements Serializable {
         return resultAmount;
     }
 
-    public Long getClientId(){
+    public Long clientId(){
         return this.client.getId();
     }
 
