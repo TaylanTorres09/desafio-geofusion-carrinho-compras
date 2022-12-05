@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import br.com.api.geofusion.cart.dto.ItemDto;
+import br.com.api.geofusion.cart.models.Client;
 import br.com.api.geofusion.cart.models.Item;
 import br.com.api.geofusion.cart.models.Product;
 import br.com.api.geofusion.cart.models.ShoppingCart;
@@ -223,6 +224,14 @@ public class ShoppingCartFactory {
      * e false caso o cliente não possua um carrinho.
      */
     public boolean invalidate(String clientId) {
+        List<ShoppingCart> shoppingCarts = findByClient(Long.valueOf(clientId));
+        if(!shoppingCarts.isEmpty()){
+            Client client = clientRepository.findById(Long.valueOf(clientId)).get();
+            client.setShoppingCarts(null);
+            clientRepository.save(client);
+            shoppingCartRepository.delete(shoppingCarts.get(0));
+            return true;
+        }
         return false;
     }
 }

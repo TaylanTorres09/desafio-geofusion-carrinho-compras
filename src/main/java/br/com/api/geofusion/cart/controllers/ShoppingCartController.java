@@ -72,4 +72,10 @@ public class ShoppingCartController {
         return shoppingCart.getAverageTicketAmount();
     }
 
+    // Teste
+    @DeleteMapping("/delete/cart/{clientId}")
+    public Boolean invalidate(@PathVariable(name = "clientId") String clientId) {
+        return shoppingCart.invalidate(clientId);
+    }
+
 }
