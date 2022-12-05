@@ -2,7 +2,6 @@ package br.com.api.geofusion.cart.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -120,6 +119,12 @@ public class ShoppingCartFactory {
         }
     }
 
+    /**
+     * Remove Item do carrinho passando o produto como parametro.
+     * @param clientId
+     * @param productId
+     * @return
+     */
     public ResponseEntity<?> deleteProductCart(Long clientId, Long productId){
         try {
             Product product = productService.findById(productId);
