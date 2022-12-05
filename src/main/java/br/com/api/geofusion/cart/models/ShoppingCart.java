@@ -59,7 +59,7 @@ public class ShoppingCart implements Serializable {
      * @param quantity
      */
     public void addItem(Product product, BigDecimal unitPrice, int quantity) {
-           
+
     }
     // Teste
     public void addItemTest(Item item) {
@@ -74,7 +74,10 @@ public class ShoppingCart implements Serializable {
      * caso o produto não exista no carrinho.
      */
     public boolean removeItem(Product product) {
-        return false;
+        List<Item> itemsCart = items.stream().filter(item -> item.getProduct().getCode() == product.getCode()).toList();
+        if(itemsCart.isEmpty())
+            return false;
+        return true;
     }
 
     /**
@@ -87,7 +90,12 @@ public class ShoppingCart implements Serializable {
      * caso o produto não exista no carrinho.
      */
     public boolean removeItem(int itemIndex) {
-        return false;
+        try {
+            items.get(itemIndex);
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
