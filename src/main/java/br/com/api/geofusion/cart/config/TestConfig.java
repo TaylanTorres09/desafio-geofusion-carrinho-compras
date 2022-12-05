@@ -1,7 +1,6 @@
 package br.com.api.geofusion.cart.config;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,11 +10,9 @@ import org.springframework.context.annotation.Profile;
 import br.com.api.geofusion.cart.models.Client;
 import br.com.api.geofusion.cart.models.Item;
 import br.com.api.geofusion.cart.models.Product;
-import br.com.api.geofusion.cart.models.ShoppingCart;
 import br.com.api.geofusion.cart.repositories.ClientRepository;
 import br.com.api.geofusion.cart.repositories.ItemRepository;
 import br.com.api.geofusion.cart.repositories.ProductRepository;
-import br.com.api.geofusion.cart.repositories.ShoppingCartRepository;
 
 @Configuration
 @Profile("test")
@@ -29,10 +26,6 @@ public class TestConfig implements CommandLineRunner{
 
     @Autowired
     private ItemRepository itemRepository;
-
-    @Autowired
-    private ShoppingCartRepository shoppingCartRepository;
-
 
     @Override
     public void run(String... args) throws Exception {
