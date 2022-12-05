@@ -154,6 +154,12 @@ public class ShoppingCartFactory {
         }
     }
 
+    /**
+     * Remove Item do carrinho passando a posição do item no array de items.
+     * @param clientId
+     * @param indexItem
+     * @return
+     */
     public ResponseEntity<?> deleteItemCart(Long clientId, Integer indexItem){
         try {
             List<ShoppingCart> shoppingCarts = findByClient(clientId);
