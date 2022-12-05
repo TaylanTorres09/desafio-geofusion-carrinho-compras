@@ -63,7 +63,7 @@ listar: /client [Get]
 #### Para Carrinho:
 - Criar carrinho: /shopping-cart/register/{clientId} passar **id** do client na url [Post]
 
-- Listar: /shopping-cart/{clientId} [Get]
+- Listar: /shopping-cart/client-cart/{clientId} [Get]
 
 - Adicionar itens: /shopping-cart/add-item?clientId=id&productId=id passar os ids respectivos do cliente e do produto como *query params*.
 
@@ -80,7 +80,7 @@ listar: /client [Get]
 - Deletar item passando a posição: /shopping-cart/delete-product/cart?clientId=id&indexItem=posição [Delete]
 
 ### Descrição - Executar Api localmente:
-- Para clonar o projeto: git clone https://github.com/TaylanTorres09/taxPayer-api
+- Para clonar o projeto: git clone https://github.com/TaylanTorres09/desafio-geofusion-carrinho-compras.git
 - Para Executar o projeto precisasse:
     - Java [JDK](https://www.oracle.com/java/technologies/downloads/#java17). Este projeto está usando a versão 17.
     - Banco [H2](https://www.h2database.com/html/main.html) utilizado em memória, coloquei no perfil de teste pois podemos abranger para outro banco de dados quando a api for colocada em produção.

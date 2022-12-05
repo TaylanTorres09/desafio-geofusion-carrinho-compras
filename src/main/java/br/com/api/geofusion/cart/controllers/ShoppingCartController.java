@@ -32,37 +32,23 @@ public class ShoppingCartController {
         return shoppingCart.create(clientId);
     }
 
-    // Teste
-    @GetMapping("/{clientId}")
+    @GetMapping("/client-cart/{clientId}")
     public List<ShoppingCart> findByClient(@PathVariable(name = "clientId") Long clientId) {
         return shoppingCart.findByClient(clientId);
     }
 
-    // Teste
-    @PutMapping("/add-item-test")
-    public ShoppingCart addItemTest(@RequestParam(name = "clientId") Long clientId, @RequestParam Long itemId) {
-        return shoppingCart.addItem(clientId, itemId);
-    }
-
     @PutMapping("/add-item")
-    public ResponseEntity<?> addItem(@Valid @RequestBody ItemDto itemDto, 
-                                @RequestParam(name = "clientId") Long clientId, 
-                                @RequestParam Long productId
-    ) {
+    public ResponseEntity<?> addItem(@Valid @RequestBody ItemDto itemDto, @RequestParam(name = "clientId") Long clientId, @RequestParam Long productId) {
         return shoppingCart.addItemCart(itemDto, clientId, productId);
     }
 
     @DeleteMapping("/delete-product/cart")
-    public ResponseEntity<?> deleteProductCart(@RequestParam(name = "clientId") Long clientId, 
-                                            @RequestParam(name = "productId") Long productId
-    ) {
+    public ResponseEntity<?> deleteProductCart(@RequestParam(name = "clientId") Long clientId, @RequestParam(name = "productId") Long productId) {
         return shoppingCart.deleteProductCart(clientId, productId);
     }
 
     @DeleteMapping("/delete-item/cart")
-    public ResponseEntity<?> deleteItemCart(@RequestParam(name = "clientId") Long clientId, 
-                                            @RequestParam(name = "indexItem") Integer indexItem
-    ) {
+    public ResponseEntity<?> deleteItemCart(@RequestParam(name = "clientId") Long clientId, @RequestParam(name = "indexItem") Integer indexItem) {
         return shoppingCart.deleteItemCart(clientId, indexItem);
     }
 

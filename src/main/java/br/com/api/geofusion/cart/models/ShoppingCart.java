@@ -58,11 +58,13 @@ public class ShoppingCart implements Serializable {
      * @param quantity
      */
     public void addItem(Product product, BigDecimal unitPrice, int quantity) {
-
+        Item item = new Item(null, product, unitPrice, quantity);
+        this.items.add(item);
     }
-    // Teste
+    
+    // Outra opção para função addItem.
     public void addItemTest(Item item) {
-        items.add(item);
+        this.items.add(item);
     }
 
     /**
