@@ -77,7 +77,7 @@ public class ShoppingCartFactory {
      */
     public List<ShoppingCart> findByClient(Long clientId) {
         return shoppingCartRepository.findAll().stream()
-                                        .filter(cart -> cart.getClient().getId() == clientId).toList();
+                                        .filter(cart -> cart.getClientId().equals(clientId)).toList();
     }
 
     // Teste

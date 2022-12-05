@@ -112,6 +112,10 @@ public class ShoppingCart implements Serializable {
         return resultAmount;
     }
 
+    public Long getClientId(){
+        return this.client.getId();
+    }
+
     /**
      * Retorna a lista de itens do carrinho de compras.
      *
