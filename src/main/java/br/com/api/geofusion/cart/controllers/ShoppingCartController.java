@@ -58,4 +58,11 @@ public class ShoppingCartController {
         return shoppingCart.deleteProductCart(clientId, productId);
     }
 
+    @DeleteMapping("/delete-item/cart")
+    public ResponseEntity<?> deleteItemCart(@RequestParam(name = "clientId") Long clientId, 
+                                            @RequestParam(name = "indexItem") Integer indexItem
+    ) {
+        return shoppingCart.deleteItemCart(clientId, indexItem);
+    }
+
 }

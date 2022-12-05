@@ -3,7 +3,6 @@ package br.com.api.geofusion.cart.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 

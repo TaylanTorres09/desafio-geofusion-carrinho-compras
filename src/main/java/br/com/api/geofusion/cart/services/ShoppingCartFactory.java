@@ -154,6 +154,32 @@ public class ShoppingCartFactory {
         }
     }
 
+    public ResponseEntity<?> deleteItemCart(Long clientId, Integer indexItem){
+        try {
+            List<ShoppingCart> shoppingCarts = findByClient(clientId);
+            if(shoppingCarts.isEmpty())
+                return new ResponseEntity<String>("Client without cart", HttpStatus.BAD_GATEWAY);
+            
+            ShoppingCart shoppingCart = shoppingCarts.get(0);
+            
+            if(shoppingCart.removeItem(indexItem)) {
+                List<Item> itemsCart = shoppingCart.getItems().stream().toList();
+                shoppingCart.getItems().remove(itemsCart.get(indexItem));
+                shoppingCartRepository.save(shoppingCart);
+
+                itemRepository.delete(itemsCart.get(indexItem));
+                return new ResponseEntity<ShoppingCart>(shoppingCart, HttpStatus.OK);
+            }
+            return new ResponseEntity<String>("IndexOutOfBounds", HttpStatus.BAD_REQUEST);
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(clientId);
+        } catch (NoSuchElementException e) {
+            throw new ResourceNotFoundException(clientId);
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
+    }
 
     /**
      * Retorna o valor do ticket médio no momento da chamada ao método.
