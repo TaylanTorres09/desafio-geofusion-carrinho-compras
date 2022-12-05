@@ -60,6 +60,11 @@ public class ShoppingCartFactory {
         return shoppingCart;
     }
 
+    /**
+     * Função para retornar carrinho do cliente
+     * @param clientId
+     * @return
+     */
     public List<ShoppingCart> findByClient(Long clientId) {
         return shoppingCartRepository.findAll().stream()
                                         .filter(cart -> cart.getClient().getId() == clientId).toList();
@@ -79,6 +84,14 @@ public class ShoppingCartFactory {
         return _shoppingCart;
     }
 
+
+    /**
+     * Função para adicionar item no carrinho
+     * @param itemDto
+     * @param clientId
+     * @param productId
+     * @return
+     */
     public ResponseEntity<?> addItemCart(ItemDto itemDto, Long clientId, Long productId) {
         try {
             ShoppingCart shoppingCart = findByClient(clientId).get(0);
