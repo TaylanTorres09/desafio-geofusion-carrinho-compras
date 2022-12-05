@@ -41,13 +41,13 @@ public class TestConfig implements CommandLineRunner{
 
         Product product = new Product(null, "teste");
         productRepository.save(product);
-
+        
         Item item = new Item(null, product, BigDecimal.valueOf(300.00), 2);
         itemRepository.save(item);
+        
+        product.getItems().add(item);
+        productRepository.save(product);
 
-        // ShoppingCart shoppingCart = new ShoppingCart(null, new ArrayList<>());
-        // shoppingCart.setClient(client);
-        // shoppingCartRepository.save(shoppingCart);
     }
     
 }
